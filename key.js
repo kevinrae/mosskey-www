@@ -15,22 +15,30 @@ function removeCharacter() {
 }
 
 function clickButton() {
+//function makeCharacterMenu() {
     var s = document.createElement("script");
-    s.src = "jsonp-new.php";
+//    s.src = "jsonp-new.php";
+    s.src = "character-tree-depth.php";
     document.body.appendChild(s);
 }
 
 function myFUNC(myObj) {
-  var x, txt = "";
+  var row, txt = "";
   txt += "<table>";
-  for (x in myObj) {
-    txt += "<tr><td>" + myObj[x].id + "</td><td>"+ myObj[x].name + "</td><td>" + myObj[x].lft + "</td><td>" + myObj[x].rht + "</td></tr>";
+  for (row in myObj) {
+    txt += "<tr>";
+    txt += "<td>" + myObj[row].id + "</td>";
+    txt += "<td>" + myObj[row].name + "</td>";
+    txt += "<td>" + myObj[row].lft + "</td>";
+    txt += "<td>" + myObj[row].rht + "</td>";
+    txt += "<td>" + myObj[row].depth + "</td>";
+    txt += "</tr>";
   }
   txt += "</table>";
   document.getElementById("dynamic_menu").innerHTML = txt;
 }
 
 
-function makeCharacterMenu() {
-  $(".dropdown").prepend("<pre> THIS IS A TEST</pre>");
-}
+//function makeCharacterMenu() {
+//  $(".dropdown").prepend("<pre> THIS IS A TEST</pre>");
+//}
