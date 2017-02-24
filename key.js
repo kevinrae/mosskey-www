@@ -1,13 +1,27 @@
 function init() {
   $('a.character').click( addCharacter );
   $(document).on('click', '#character-panel-ul-id a.remove_character', removeCharacter)
-  $(document).ready( makeCharacterMenu);
+//  $(document).ready( makeCharacterMenu);
+  $('a.character').click(function() {
+    var id = $(this).attr('id');
+    var name = $(this).text();
+    alert('id:'+id+' name:'+name);
+  });
 }
 
 function addCharacter() {
   // need to prevent populating the panel with duplicate entries.  Need magic logic for this.
-  var CharacterName = $(this).prop('id');
-  $('#character-panel-ul-id').prepend('<li id='+CharacterName+'>'+CharacterName+'<a class="remove_character" id='+CharacterName+' href="#">[X]</a></li>');
+  console.log($(this));
+  var CharacterName = $(this).prop("id");
+  $('#character-panel-ul-id').prepend('<li id="'+CharacterName+'">'+CharacterName+'<a class="remove_character" id="'+CharacterName+'" href="#">[X]</a></li>');
+}
+
+function addCharacterToPanel() {
+//  console.log($(this));
+//  console.log(this);
+  var id = $(this).attr('id');
+  var name = $(this).text();
+  $('#character-panel-ul-id').prepend('<li id="'+id+'">'+name+'<a class="remove_character" id="'+id+'" href="#">[X]</a></li>');
 }
 
 function removeCharacter() {
@@ -43,13 +57,12 @@ function format_unordered_list_menu(data) {
   txt += '<ul class=dropdown-menu>';
   for (row in data) {
     if (data[row].rht - data[row].lft == 1) {// leaf node?
-      txt += '<li><a class="character" id="' + data[row].name + '" href="#">' + data[row].name + '</a></li>'; 
+      txt += '<li><a class="character" id="' + data[row].id + '" href="#" onclick="addCharacterToPanel()" name="' + data[row].name + '">'+ data[row].name + '</a></li>'; 
     // parent?
     }
   }
   txt += "</ul>";
   $('#dynamic_menu_button').after(txt);
-//  document.getElementById("dynamic_menu").innerHTML = txt;
 }
 
 //function makeCharacterMenu() {
