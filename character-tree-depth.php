@@ -26,7 +26,8 @@ while($row = mysqli_fetch_assoc($result)) {
 
 $json_payload = json_encode($row_array);
 //echo $json_payload;
-echo "myFUNC(".$json_payload.");";
+//echo "myFUNC(".$json_payload.");";
+echo "format_unordered_list_menu(".$json_payload.");";
 
 mysqli_close($conn);
 ?>  

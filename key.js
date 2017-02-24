@@ -38,6 +38,19 @@ function myFUNC(myObj) {
   document.getElementById("dynamic_menu").innerHTML = txt;
 }
 
+function format_unordered_list_menu(data) {
+  var row, txt = "";
+  txt += '<ul class=dropdown-menu>';
+  for (row in data) {
+    if (data[row].rht - data[row].lft == 1) {// leaf node?
+      txt += '<li><a class="character" id="' + data[row].name + '" href="#">' + data[row].name + '</a></li>'; 
+    // parent?
+    }
+  }
+  txt += "</ul>";
+  $('#dynamic_menu_button').after(txt);
+//  document.getElementById("dynamic_menu").innerHTML = txt;
+}
 
 //function makeCharacterMenu() {
 //  $(".dropdown").prepend("<pre> THIS IS A TEST</pre>");
