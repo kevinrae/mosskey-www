@@ -10,7 +10,7 @@ function addCharacterToPanel() {
   if ($('#selected_characters li').find("[data-selected-id='"+id+"']" ).length) {  
     alert('you already selected :' + name);
   } else {
-   $('#selected_characters').prepend('<li data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#">[X]</a></li>');
+   $('#selected_characters').prepend('<li data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#"> [X]</a></li>');
   }
 }
 
