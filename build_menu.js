@@ -1,47 +1,38 @@
 function init() {
   $('a.character').click( addCharacterToPanel );
   $(document).on('click', '#selected_characters a.remove_character', removeCharacter)
-//  $('a.character').click(function() {
-//    var id = $(this).attr('id');
-//    var name = $(this).text();
-//    alert('id:'+id+' name:'+name);
-//  });
-}
-
-function addCharacter() {
-  // need to prevent populating the panel with duplicate entries.  Need magic logic for this.
-  console.log($(this));
-  var CharacterName = $(this).prop("id");
-  $('#selected_characters').prepend('<li id="'+CharacterName+'">'+CharacterName+'<a class="remove_character" id="'+CharacterName+'" href="#">[X]</a></li>');
 }
 
 function addCharacterToPanel() {
-  console.log($(this));
   console.log(this);
-  var id = $(this).attr('id');
+  var id = $(this).data('id');
   var name = $(this).text();
-  $('#selected_characters').prepend('<li id="'+id+'">'+name+'<a class="remove_character" id="'+id+'" href="#">[X]</a></li>');
+  if ($('#selected_characters li').find("[data-selected-id='"+id+"']" ).length) {  
+    alert('you already selected :' + name);
+  } else {
+   $('#selected_characters').prepend('<li data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#">[X]</a></li>');
+  }
 }
 
 function removeCharacter() {
     $(this).parent().remove();
 }
 
-function myFUNC(myObj) {
-  var row, txt = "";
-  txt += "<table>";
-  for (row in myObj) {
-    txt += "<tr>";
-    txt += "<td>" + myObj[row].id + "</td>";
-    txt += "<td>" + myObj[row].name + "</td>";
-    txt += "<td>" + myObj[row].lft + "</td>";
-    txt += "<td>" + myObj[row].rht + "</td>";
-    txt += "<td>" + myObj[row].depth + "</td>";
-    txt += "</tr>";
-  }
-  txt += "</table>";
-  document.getElementById("dynamic_menu").innerHTML = txt;
-}
+//function myFUNC(myObj) {
+//  var row, txt = "";
+//  txt += "<table>";
+//  for (row in myObj) {
+//    txt += "<tr>";
+//    txt += "<td>" + myObj[row].id + "</td>";
+//    txt += "<td>" + myObj[row].name + "</td>";
+//    txt += "<td>" + myObj[row].lft + "</td>";
+//    txt += "<td>" + myObj[row].rht + "</td>";
+//    txt += "<td>" + myObj[row].depth + "</td>";
+ //   txt += "</tr>";
+//  }
+//  txt += "</table>";
+//  document.getElementById("dynamic_menu").innerHTML = txt;
+//}
 
 //$("ul#theList").append("<li><a href='url-here'>Link Text</a></li>");
 function makeUL (data) {
@@ -60,7 +51,7 @@ function format_unordered_list_menu(data) {
   txt += '<ul class=dropdown-menu>';
   for (row in data) {
 //    if (data[row].rht - data[row].lft == 1) {// leaf node?
-      txt += '<li><a class="character" id="' + data[row].id; 
+      txt += '<li><a class="character" data-id="' + data[row].id; 
       txt += '" href="#"';
       txt += ' name="' + data[row].name + '">';
 
@@ -69,7 +60,7 @@ function format_unordered_list_menu(data) {
 //      }
 
       txt += data[row].name;
-      txt += ' id: '+ data[row].id;
+      txt += ' data-id: '+ data[row].id;
       txt += ' lft: '+ data[row].lft;
       txt += ' rht: '+ data[row].rht;
       txt += ' depth: '+ data[row].depth;
