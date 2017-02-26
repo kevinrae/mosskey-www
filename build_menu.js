@@ -19,9 +19,62 @@ function removeCharacter() {
 }
 
 //$("ul#theList").append("<li><a href='url-here'>Link Text</a></li>");
-function makeUL (data) {
-  var ul = $('<ul>');
-  return ul;
+function parsetree(data) {
+  var row, txt = "";
+  var depth;
+  var parentrht;
+  var stack=new Array();
+  txt += '<ul class="dropdown-menu">';
+
+  for (row in data) {
+    console.log(data[row]);
+    if (data[row].rht - data[row].lft > 1) { // parent test
+      txt += '<li class="dropdown-submenu">';
+      txt += '<a class="character" data-id="' + data[row].id; 
+      txt += ' name="' + data[row].name + '">';
+      //////////////////////////////////////////////////////////
+      // indent logic for tree display - short-term work around 
+      // until we can get dynamic dropdown submenus working
+      for (i = 1; i < data[row].depth; i++){
+        txt += " . ";
+      } ///////////////////////////////////////////////////////
+      txt += data[row].name;
+//      txt += ' data-id: '+ data[row].id;
+      txt += ' lft: '+ data[row].lft;
+      txt += ' rht: '+ data[row].rht;
+      txt += ' depth: '+ data[row].depth;
+      txt += '</a>'; 
+      txt += '<ul class="dropdown-menu">';
+      // store rht value in stack for parents
+      stack.push(data[row].rht);
+      } else {
+      // leaf test
+      txt += '<li><a class="character" data-id="' + data[row].id; 
+      txt += '" href="#"';
+      txt += ' name="' + data[row].name + '">';
+      //////////////////////////////////////////////////////////
+      // indent logic for tree display - short-term work around 
+      // until we can get dynamic dropdown submenus working
+      for (i = 1; i < data[row].depth; i++){
+        txt += " . ";
+      } ///////////////////////////////////////////////////////
+      txt += data[row].name;
+//      txt += ' data-id: '+ data[row].id;
+      txt += ' lft: '+ data[row].lft;
+      txt += ' rht: '+ data[row].rht;
+      txt += ' depth: '+ data[row].depth;
+      txt += '</a></li>'; 
+
+      parentrht = stack.pop();
+      if (parentrht - data[row].rht == 1) { // last child in tree 
+        txt += '</ul></li>';                // close tags
+      } else {
+        stack.push(parentrht); // replace parent.rht in stack 
+      }
+    }
+  }  
+  txt += '</ul>';
+  $('#dynamic_menu_button').after(txt);
 }
 
 //http://stackoverflow.com/questions/6692538/generate-unordered-list-from-json-data
@@ -33,6 +86,12 @@ function format_unordered_list_menu(data) {
   var depth;
   txt += '<ul class=dropdown-menu>';
   for (row in data) {
+    // leaf test
+    // parent test
+    // store rht value in stack for parents
+    // if (parent.rht - data[row].rht == 1) // close the </ul>
+
+
 //    if (data[row].rht - data[row].lft == 1) {// leaf node?
       txt += '<li><a class="character" data-id="' + data[row].id; 
       txt += '" href="#"';
