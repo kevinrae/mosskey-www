@@ -22,7 +22,7 @@ function removeCharacter() {
 function parsetree(data) {
   var row, txt = "";
   var depth;
-  var parentrht;
+  var parentrht, grandparentrht;
   var stack=new Array();
   txt += '<ul class="dropdown-menu">';
 
@@ -42,7 +42,7 @@ function parsetree(data) {
 //      txt += ' data-id: '+ data[row].id;
       txt += ' lft: '+ data[row].lft;
       txt += ' rht: '+ data[row].rht;
-      txt += ' depth: '+ data[row].depth;
+//      txt += ' depth: '+ data[row].depth;
       txt += '</a>'; 
       txt += '<ul class="dropdown-menu">';
       // store rht value in stack for parents
@@ -62,12 +62,21 @@ function parsetree(data) {
 //      txt += ' data-id: '+ data[row].id;
       txt += ' lft: '+ data[row].lft;
       txt += ' rht: '+ data[row].rht;
-      txt += ' depth: '+ data[row].depth;
+//      txt += ' depth: '+ data[row].depth;
       txt += '</a></li>'; 
 
       parentrht = stack.pop();
       if (parentrht - data[row].rht == 1) { // last child in tree 
         txt += '</ul></li>';                // close tags
+      //////////////////////////////////////////////////////////
+      // check to see if we need to close a grandparent too
+      // note - only works for 3-level trees...
+        grandparentrht = stack.pop();
+        if (grandparentrht - parentrht == 1){
+          txt += '</ul></li>';                // close tags
+        } else {
+          stack.push(grandparentrht); // replace parent.rht in stack 
+        } //////////////////////////////////////////////////////
       } else {
         stack.push(parentrht); // replace parent.rht in stack 
       }
