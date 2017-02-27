@@ -18,13 +18,24 @@ function removeCharacter() {
     $(this).parent().remove();
 }
 
-//$("ul#theList").append("<li><a href='url-here'>Link Text</a></li>");
 function parsetree(data) {
   var row, txt = "";
   var depth;
-  var parentrht, grandparentrht;
-  var stack=new Array();
+//  var parentrht, grandparentrht;
+  var stack = [];
   txt += '<ul class="dropdown-menu">';
+
+  /// nested function//////////////////////////////////////////
+  function close_tags_for_last_child_in_tree(stack, rht) {
+    var parentrht = stack.pop();
+    if (parentrht - rht == 1) {           // last child in tree 
+      txt += '</ul></li>';                // close tags
+      close_tags_for_last_child_in_tree(stack, parentrht);
+    } else { 
+      stack.push(parentrht);
+    }
+  }
+  //////////////////////////////////////////////////////////
 
   for (row in data) {
     console.log(data[row]);
@@ -65,6 +76,8 @@ function parsetree(data) {
 //      txt += ' depth: '+ data[row].depth;
       txt += '</a></li>'; 
 
+      close_tags_for_last_child_in_tree(stack, data[row].rht);
+/*
       parentrht = stack.pop();
       if (parentrht - data[row].rht == 1) { // last child in tree 
         txt += '</ul></li>';                // close tags
@@ -80,6 +93,7 @@ function parsetree(data) {
       } else {
         stack.push(parentrht); // replace parent.rht in stack 
       }
+*/
     }
   }  
   txt += '</ul>';
