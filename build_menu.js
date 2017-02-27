@@ -3,6 +3,16 @@ function init() {
   $(document).on('click', '#selected_characters a.remove_character', removeCharacter)
 }
 
+function displayresults() {
+/* http://stackoverflow.com/questions/6051586/best-way-to-take-the-content-from-an-li-tag-and-copy-it-elsewhere
+*/
+  var txt = "You selected these KeyCharacter ids:";
+  $('li.selected').each(function(i) {
+    txt += " " + $(this).clone().data("selected-id");
+  });
+  $('#results').text(txt); //overwrites p on every run.
+}
+
 function addCharacterToSelectedPanel() {
   var txtalrt = '';
   console.log(this);
@@ -13,8 +23,9 @@ function addCharacterToSelectedPanel() {
     txtalrt += ' and you only need to pick it once.  Please pick something else.'; 
     alert(txtalrt);
   } else {
-    $('#selected_characters').prepend('<li data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#"> [X]</a></li>');
+    $('#selected_characters').prepend('<li class="selected" data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#"> [X]</a></li>');
   }
+  displayresults();
 }
 
 function removeCharacter() {
