@@ -69,6 +69,7 @@ function parsetree(data) {
     console.log(data[row]);
     if (data[row].rht - data[row].lft > 1) { // parent test
       txt += '<li class="dropdown-submenu">';
+        txt += '<a href="#">';
 //      txt += '<a class="character" data-id="' + data[row].id; 
 //      txt += ' name="' + data[row].name + '">';
       txt += data[row].name;
@@ -76,7 +77,7 @@ function parsetree(data) {
 //      txt += ' lft: '+ data[row].lft;
 //      txt += ' rht: '+ data[row].rht;
 //      txt += ' depth: '+ data[row].depth;
-//      txt += '</a>'; 
+      txt += '</a>'; 
       txt += '<ul class="dropdown-menu">';
       stack.push(data[row].rht); // store rht in stack for parents
       } else { // this is a leaf node 

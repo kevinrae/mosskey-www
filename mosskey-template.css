@@ -71,7 +71,6 @@ body {
 
 /* Custom page CSS
 -------------------------------------------------- */
-/* Not required for template or sticky footer method. */
 
 body > .container {
   padding: 60px 15px 0;
@@ -80,23 +79,6 @@ body > .container {
   margin: 20px 0;
 }
  
-.character-panel {
-  margin: 20px 0;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-
-.result-panel {
-  margin: 20px 0;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-
-.footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
 code {
   font-size: 80%;
 }
