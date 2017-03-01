@@ -78,6 +78,11 @@ body > .container {
 .container .text-muted {
   margin: 20px 0;
 }
+
+#selected_characters {
+  list-style-type: none;
+  padding: 1px;
+}
  
 code {
   font-size: 80%;

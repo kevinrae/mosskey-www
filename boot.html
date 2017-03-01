@@ -23,7 +23,7 @@
   <body>
     <h1>Mosskey Template</h1>
 
-<!-- Single button -->
+<!-- Dropdown button -->
 <div class="container">
   <div class="dropdown">
     <div class="btn-group">
@@ -39,7 +39,10 @@
         <div class="panel-heading">
           <h3 class="panel-title">Characters</h3>
         </div>
-        <div id=selected_characters class="panel-body"> <!-- selected characters go here -->
+        <div class="panel-body"> 
+          <ul id=selected_characters>
+            <!-- selected characters go here -->
+          </ul>
         </div>
       </div>
     </div>
@@ -58,8 +61,6 @@
   <p id=results></p>
 </div>
 
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -68,7 +69,9 @@
    <script type="text/javascript">
    $( init );
    </script>
-   <script src="get-character-menu-tree.php"></script>
+   <!-- build character dropdown menus using db query -->
+   <script src="get-character-menu-tree.php"></script> 
+   <!-- --------------------------------------------- -->
   </body>
 </html>
 
