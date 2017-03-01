@@ -79,7 +79,7 @@ body > .container {
   margin: 20px 0;
 }
 
-#selected_characters {
+#selected_characters,#result_list {
   list-style-type: none;
   padding: 1px;
 }

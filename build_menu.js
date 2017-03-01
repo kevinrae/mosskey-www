@@ -11,16 +11,16 @@ function search_map(ids) {
     data: { idArray : ids },
     success: function (res){
       console.log(res);
-      var o = "DB Matched: ";
+      var o = "";
       if (res === 'NULL') { 
-        $('#search_results').text(o + "nothing");
+        $('#result_list').html("<li>No matches</li>");
       } else {
       var obj = JSON.parse(res);
         for (var i in obj) {
            console.log(obj[i].Name);
-           o += " " + obj[i].Name;
+           o += "<li>" + obj[i].Name + "</li>";
         }
-        $('#search_results').text(o);
+        $('#result_list').html(o);
       }
     },
  
@@ -46,7 +46,8 @@ function displayresults() {
     txt += " " + id;
 //    txt += " " + $(this).clone().data("selected-id");
   });
-  $('#results').text(txt); //overwrites p on every run.
+//  $('#results').text(txt); //overwrites p on every run.
+  console.log(txt);
   search_map(ids);
 }
 
