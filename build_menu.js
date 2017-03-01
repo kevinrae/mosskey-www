@@ -56,12 +56,20 @@ function addCharacterToSelectedPanel() {
   console.log(this);
   var id = $(this).data('id');
   var name = $(this).text();
+  var out = "";
   if ($('#selected_characters li').find("[data-selected-id='"+id+"']" ).length) {  
     txtalrt += 'You already selected ' + name;
     txtalrt += ' and you only need to pick it once.  Please pick something else.'; 
     alert(txtalrt);
   } else {
-    $('#selected_characters').prepend('<li class="selected" data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#"> [X]</a></li>');
+    out += '<li class="selected" data-selected-id="';
+    out += id+'">';
+    out += name;
+    out +='<a class="remove_character" data-selected-id="';
+    out += id;
+    out += '" href="#"> <span class="glyphicon glyphicon-trash" aria-hidden="true"</span></a></li>';
+//    $('#selected_characters').prepend('<li class="selected" data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#"> [X]</a></li>');
+    $('#selected_characters').prepend(out);
   }
   displayresults();
 }
