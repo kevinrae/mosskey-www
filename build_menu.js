@@ -4,19 +4,6 @@ function init() {
 }
 
 function search_map(ids) {
-/*
-  $.post("search_map.php", 
-          data:{ idArray : ids },
-          success: function( data, textStatus, jQxhr ){
-            $('#search_results').text(data);
-            console.log("query results: " + data);
-          },
-          error: function( jqXhr, textStatus, errorThrown ){
-            console.log(errorThrown);
-          }
-  });
-}          
-*/
     var url = "search_map.php";
     $.ajax({
     type: "POST",
@@ -79,7 +66,8 @@ function addCharacterToSelectedPanel() {
 }
 
 function removeCharacter() {
-    $(this).parent().remove();
+  $(this).parent().remove();
+  displayresults();
 }
 
 function parsetree(data) {

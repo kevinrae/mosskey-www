@@ -26,7 +26,7 @@ if($ids) {
   }
 
 } else {
-  echo "post variable not set";
+  echo "NULL";
 }
 //echo "myFUNC(".$json_payload.");";
 //echo "parsetree(".$json_payload.");";
