@@ -3,14 +3,64 @@ function init() {
   $(document).on('click', '#selected_characters a.remove_character', removeCharacter)
 }
 
+function search_map(ids) {
+/*
+  $.post("search_map.php", 
+          data:{ idArray : ids },
+          success: function( data, textStatus, jQxhr ){
+            $('#search_results').text(data);
+            console.log("query results: " + data);
+          },
+          error: function( jqXhr, textStatus, errorThrown ){
+            console.log(errorThrown);
+          }
+  });
+}          
+*/
+    var url = "search_map.php";
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: { idArray : ids },
+    success: function (res){
+      console.log(res);
+      var o = "DB Matched: ";
+      if (res === 'NULL') { 
+        $('#search_results').text(o + "nothing");
+      } else {
+      var obj = JSON.parse(res);
+        for (var i in obj) {
+           console.log(obj[i].Name);
+           o += " " + obj[i].Name;
+        }
+        $('#search_results').text(o);
+      }
+    },
+ 
+    error: function( jqXhr, textStatus, errorThrown ){
+      console.log(errorThrown);
+    }
+  });
+}
+
+/*
+[{"Name":"basic moss","id":"1","KeyCharacterId":"4"},{"Name":"advanced moss","id":"2","KeyCharacterId":"5"},{"Name":"advanced moss","id":"2","KeyCharacterId":"6"}]
+*/
+
+
 function displayresults() {
 /* http://stackoverflow.com/questions/6051586/best-way-to-take-the-content-from-an-li-tag-and-copy-it-elsewhere
 */
+  var ids = [];
   var txt = "You selected these KeyCharacter ids:";
   $('li.selected').each(function(i) {
-    txt += " " + $(this).clone().data("selected-id");
+    var id = $(this).clone().data("selected-id");
+    ids.push(id);
+    txt += " " + id;
+//    txt += " " + $(this).clone().data("selected-id");
   });
   $('#results').text(txt); //overwrites p on every run.
+  search_map(ids);
 }
 
 function addCharacterToSelectedPanel() {
