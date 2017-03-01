@@ -10,6 +10,7 @@ body {
 }
 .footer {
   position: absolute;
+  padding: 2px;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
@@ -83,7 +84,7 @@ body > .container {
   list-style-type: none;
   padding: 1px;
 }
- 
+
 code {
   font-size: 80%;
 }
