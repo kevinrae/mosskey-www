@@ -18,7 +18,8 @@ function search_map(ids) {
       var obj = JSON.parse(res);
         for (var i in obj) {
            console.log(obj[i].Name);
-           o += "<li>" + obj[i].Name + "</li>";
+           o += "<li><a class='taxa' href='detail.html?id=" + obj[i].id + "'>" + obj[i].Name + "</a></li>";
+//           o += "<li>" + obj[i].Name + "</li>";
         }
         $('#result_list').html(o);
       }
@@ -29,6 +30,7 @@ function search_map(ids) {
     }
   });
 }
+
 
 /*
 [{"Name":"basic moss","id":"1","KeyCharacterId":"4"},{"Name":"advanced moss","id":"2","KeyCharacterId":"5"},{"Name":"advanced moss","id":"2","KeyCharacterId":"6"}]
