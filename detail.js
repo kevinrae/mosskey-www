@@ -24,7 +24,38 @@ function init () {
   id = getQueryVariable("id");
   console.log(id);
   detail(id);
+  show_all_characters(id);
 }
+
+function show_all_characters(x) {
+    var url = "show_all_characters_for_taxa_id.php";
+    var name = "";
+    console.log("show all characters id: " +x);
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: { id : x },
+    success: function (res){
+      console.log(res);
+      var o = "";
+      if (res === 'NULL') { 
+        $('#result_list').html("<li>No matches</li>");
+      } else {
+      var obj = JSON.parse(res);
+        for (var i in obj) {
+           name = obj[i].name;
+           o += "<li>" + name + "</li>";
+        }
+        console.log(o);
+        $('.characters ul').append(o);
+      }
+    },
+    error: function( jqXhr, textStatus, errorThrown ){
+      console.log(errorThrown);
+    }
+  });
+}
+
 
 function detail(idd) {
     var url = "taxa_detail.php";

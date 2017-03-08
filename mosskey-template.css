@@ -80,7 +80,7 @@ body > .container {
   margin: 20px 0;
 }
 
-#selected_characters,#result_list {
+#selected_characters,#result_list,#character_detail_list {
   list-style-type: none;
   padding: 1px;
 }
