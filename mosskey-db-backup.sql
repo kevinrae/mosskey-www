@@ -153,8 +153,6 @@ DROP TABLE IF EXISTS `taxa`;
 CREATE TABLE `taxa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
-  `lft` int(11) NOT NULL,
-  `rht` int(11) NOT NULL,
   `description` varchar(16384) DEFAULT NULL,
   `URLId` int(11) DEFAULT NULL,
   `AuthorityId` int(11) DEFAULT NULL,
@@ -173,7 +171,12 @@ CREATE TABLE `taxa` (
 
 LOCK TABLES `taxa` WRITE;
 /*!40000 ALTER TABLE `taxa` DISABLE KEYS */;
-INSERT INTO `taxa` VALUES (1,'basic moss',10,11,'this is your basic vanilla moss.',NULL,NULL,'2017-03-05 14:31:30'),(2,'peat',11,12,'used in scotch distillation',NULL,1,'2017-03-05 14:35:50'),(4,'Dicranum Scoparium',13,15,'Plants in loose to dense tufts, light to dark green, glossy to sometimes dull. Stems 2-10 cm, tomentose with white to brown rhizoids. Leaves very variable, usually falcate-secund, rarely straight and erect, slightly contorted and crisped when dry, sometimes slightly rugose or undulate, concave proximally, keeled above, lanceolate, apex acute to somewhat obtuse. margins strongly serrate in the distal or rarely slightly serrulate. laminae 1-stratose, costa percurrent, excurrent, or ending before apex, usually with 2-4 toothed ridges above on abaxial surface, with a row of guide cells, two thin stereid bands, adaxial epidermal layer of cells not differentiated, the abaxial layer interrupted by several enlarged cells that form part of the abaxial ridge, not extending to the apices, cell walls between lamina cells not bulging, leaf cells smooth, alar cells 2-stratose, well- differentiated, sometimes extending to costa. proximal laminal cells linear-rectangular, pitted',1,2,'2017-03-06 09:39:31');
+INSERT INTO `taxa` VALUES 
+  (1,'basic moss','this is your basic vanilla moss.',NULL,NULL,'2017-03-05 14:31:30'),
+  (2,'peat','used in scotch distillation',NULL,1,'2017-03-05 14:35:50'),
+  (4,'Dicranum Scoparium','Plants in loose to dense tufts, light to dark green, glossy to sometimes dull. Stems 2-10 cm, tomentose with white to brown rhizoids. Leaves very variable, usually falcate-secund, rarely straight and erect, slightly contorted and crisped when dry, sometimes slightly rugose or undulate, concave proximally, keeled above, lanceolate, apex acute to somewhat obtuse. margins strongly serrate in the distal or rarely slightly serrulate. laminae 1-stratose, costa percurrent, excurrent, or ending before apex, usually with 2-4 toothed ridges above on abaxial surface, with a row of guide cells, two thin stereid bands, adaxial epidermal layer of cells not differentiated, the abaxial layer interrupted by several enlarged cells that form part of the abaxial ridge, not extending to the apices, cell walls between lamina cells not bulging, leaf cells smooth, alar cells 2-stratose, well- differentiated, sometimes extending to costa. proximal laminal cells linear-rectangular, pitted',1,2,'2017-03-06 09:39:31'),
+  (5,'test','syntax tester: &,\\,\', ',NULL,NULL,CURRENT_TIMESTAMP);
+;
 /*!40000 ALTER TABLE `taxa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -186,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-06 10:00:49
+-- Dump completed on 2018-01-16 13:36:04
