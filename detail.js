@@ -56,7 +56,6 @@ function show_all_characters(x) {
   });
 }
 
-
 function detail(idd) {
     var url = "taxa_detail.php";
     var name, authority, description, taxa_url, taxa_timestamp, url_timestamp, url_type = "";
@@ -65,7 +64,6 @@ function detail(idd) {
     $.ajax({
     type: "POST",
     url: url,
-//    data: { idArray : id },
     data: { id : idd },
     success: function (res){
       console.log(res);
@@ -76,13 +74,15 @@ function detail(idd) {
       var obj = JSON.parse(res);
         for (var i in obj) {
            name = obj[i].name;
-           authority = obj[i].auth;
+           obj[i].auth !== null ? authority = obj[i].auth : authority = "none";
            description = obj[i].descr;
-           taxa_timestamp = obj[i].taxa_timestamp;
-           url_timestamp = obj[i].URL_timestamp;
-           url_type = obj[i].type;
+           obj[i].taxa_timestamp !== null ? taxa_timestamp = obj[i].taxa_timestamp : taxa_timestamp = "none";  
+           obj[i].URL_timestamp !== null ? url_timestamp = obj[i].URL_timestamp : url_timestamp = "none";
+           url_type = obj[i].type;                   
            url_name = obj[i].url;
-//           o += "<li><a class='taxa' href='detail.php?id=" + obj[i].id + "'>" + obj[i].Name + "</a></li>";
+           if (url_name !== null) { 
+             $('.url').html('<p><a href="'+ url_name+'">' + url_name + '</a></p>');
+           }
            o += " name: " + name;
            o += " authority: " + authority;
            o += " description: " + description;
@@ -92,16 +92,14 @@ function detail(idd) {
            o += " url_name: " + url_name;
         }
         console.log(o);
+
         $('.page-header h1').html(name);
         $('.description').html(description);
         $('.timestamps').append("<p> Taxa timestamp: " + taxa_timestamp+ "</p>");
         $('.authority').html("<p>Authority: " +authority+ "</p>");
-        $('.url').html('<p><a href="'+ url_name+'">' + url_name + '</a></p>');
         $('.timestamps').append(" URL timestamp: " + url_timestamp);
-
       }
     },
- 
     error: function( jqXhr, textStatus, errorThrown ){
       console.log(errorThrown);
     }
