@@ -19,7 +19,6 @@ function search_map(ids) {
         for (var i in obj) {
            console.log(obj[i].Name);
            o += "<li><a class='taxa' href='detail.html?id=" + obj[i].id + "'>" + obj[i].Name + "</a></li>";
-//           o += "<li>" + obj[i].Name + "</li>";
         }
         $('#result_list').html(o);
       }
@@ -46,9 +45,7 @@ function displayresults() {
     var id = $(this).clone().data("selected-id");
     ids.push(id);
     txt += " " + id;
-//    txt += " " + $(this).clone().data("selected-id");
   });
-//  $('#results').text(txt); //overwrites p on every run.
   console.log(txt);
   search_map(ids);
 }
@@ -70,7 +67,6 @@ function addCharacterToSelectedPanel() {
     out +='<a class="remove_character" data-selected-id="';
     out += id;
     out += '" href="#"> <span class="glyphicon glyphicon-trash" aria-hidden="true"</span></a></li>';
-//    $('#selected_characters').prepend('<li class="selected" data-selected-id="'+id+'">'+name+'<a class="remove_character" data-selected-id="'+id+'" href="#"> [X]</a></li>');
     $('#selected_characters').prepend(out);
   }
   displayresults();
@@ -95,7 +91,6 @@ function parsetree(data) {
    review the console.log  */
 
   var row, txt = "";
-//  var depth;
   var stack = [];
   txt += '<ul class="dropdown-menu">';
 
@@ -149,5 +144,3 @@ function parsetree(data) {
 
 //http://stackoverflow.com/questions/6692538/generate-unordered-list-from-json-data
 //http://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array
-
-//cannot add onclick attribute to href here and expect this variable to get properly scoped
