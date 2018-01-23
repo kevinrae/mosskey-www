@@ -1,6 +1,7 @@
 function init() {
   $('a.character').click( addCharacterToSelectedPanel );
   $(document).on('click', '#selected_characters a.remove_character', removeCharacter)
+  show_all_taxa_rows();
 }
 
 function search_map(ids) {
@@ -23,13 +24,36 @@ function search_map(ids) {
         $('#result_list').html(o);
       }
     },
- 
     error: function( jqXhr, textStatus, errorThrown ){
       console.log(errorThrown);
     }
   });
 }
 
+function show_all_taxa_rows() {
+  var url = "show_all_taxa_rows.php";
+    $.ajax({
+    type: "GET",
+    url: url,
+    success: function (res){
+      console.log(res);
+      var o = "";
+      if (res === 'NULL') { 
+        $('#result_list').html("<li>No matches</li>");
+      } else {
+      var obj = JSON.parse(res);
+        for (var i in obj) {
+           console.log(obj[i].Name);
+           o += "<li><a class='taxa' href='detail.html?id=" + obj[i].id + "'>" + obj[i].Name + "</a></li>";
+        }
+        $('#result_list').html(o);
+      }
+    },
+    error: function( jqXhr, textStatus, errorThrown ){
+      console.log(errorThrown);
+    }
+  });
+}
 
 /*
 [{"Name":"basic moss","id":"1","KeyCharacterId":"4"},{"Name":"advanced moss","id":"2","KeyCharacterId":"5"},{"Name":"advanced moss","id":"2","KeyCharacterId":"6"}]
