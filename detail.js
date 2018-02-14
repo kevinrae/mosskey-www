@@ -43,8 +43,21 @@ function show_all_characters(x) {
       } else {
       var obj = JSON.parse(res);
         for (var i in obj) {
-           name = obj[i].name;
-           o += "<li>" + name + "</li>";
+           name       = obj[i].name;
+           iseye      = obj[i].iseye;
+           ishandlens = obj[i].ishandlens;
+           isscope    = obj[i].isscope;
+           o += "<li>" + name;
+           if (iseye === '1') {
+             o += " <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\" title=\"View by Eye\"></span>";
+           }
+           if (ishandlens === '1') {
+             o += " <span class=\"glyphicon glyphicon-zoom-in\" aria-hidden=\"true\" title=\"View with Hand Lens\"></span>";
+           }
+           if (isscope === '1') {
+             o += " <span class=\"glyphicon glyphicon-pawn\" aria-hidden=\"true\" title=\"View with Scope\"></span>";
+          }
+           o += "</li>";
         }
         console.log(o);
         $('.characters ul').append(o);
