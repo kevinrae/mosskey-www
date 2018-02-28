@@ -7,7 +7,7 @@ if($ids) {
 
   $string_of_ids = implode(',',$ids);
 
-  $sql = "SELECT Taxa.Name, Taxa.id, Map.KeyCharacterId FROM Taxa, Map WHERE Map.TaxaId = Taxa.id AND Map.KeyCharacterId IN ($string_of_ids) GROUP BY Taxa.id;";
+  $sql = "SELECT Taxa.Name, Taxa.id, Map.KeyCharacterId FROM Taxa, Map WHERE Map.TaxaId = Taxa.id AND Map.KeyCharacterId IN ($string_of_ids) GROUP BY Taxa.Name;";
 
   $result = mysqli_query($conn, $sql);
 

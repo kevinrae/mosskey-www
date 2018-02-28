@@ -1,7 +1,7 @@
 <?php 
 require_once 'config.php';
 
-$sql = "SELECT Taxa.Name, Taxa.id FROM Taxa GROUP BY Taxa.id;";
+$sql = "SELECT Taxa.Name, Taxa.id FROM Taxa GROUP BY Taxa.Name;";
 
 $result = mysqli_query($conn, $sql);
 
