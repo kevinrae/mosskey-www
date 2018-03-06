@@ -43,7 +43,7 @@ function show_all_taxa_rows() {
       } else {
       var obj = JSON.parse(res);
         for (var i in obj) {
-           console.log(obj[i].Name);
+//           console.log(obj[i].Name);
            o += "<li><a class='taxa' href='detail.html?id=" + obj[i].id + "'>" + obj[i].Name + "</a></li>";
         }
         $('#result_list').html(o);
@@ -157,7 +157,12 @@ function parsetree(data) {
 //      txt += ' lft: '+ data[row].lft;
 //      txt += ' rht: '+ data[row].rht;
 //      txt += ' depth: '+ data[row].depth;
+//      txt += '</a>';
+      if (data[row].matches >= 1) {
+        txt += ' (' + data[row].matches + ')';
+      } 
       txt += '</a></li>'; 
+      
 
       close_tags_for_last_child_in_tree(stack, data[row].rht);
     }

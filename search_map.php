@@ -4,10 +4,16 @@ require_once 'config.php';
 
 $ids = $_POST['idArray'];
 if($ids) {
-
+  
+  $num_of_ids = count($ids);
   $string_of_ids = implode(',',$ids);
 
-  $sql = "SELECT Taxa.Name, Taxa.id, Map.KeyCharacterId FROM Taxa, Map WHERE Map.TaxaId = Taxa.id AND Map.KeyCharacterId IN ($string_of_ids) GROUP BY Taxa.Name;";
+  $sql  = "SELECT taxa.Name, taxa.id FROM (SELECT taxa.Name, taxa.id FROM taxa) taxa"; 
+  $sql .= " JOIN (SELECT map.taxaid FROM map WHERE map.keycharacterid IN ($string_of_ids)";
+  $sql .= " GROUP BY taxaid HAVING COUNT( DISTINCT map.KeyCharacterId ) = $num_of_ids ) map";
+  $sql .= " WHERE map.taxaid = taxa.id;";
+
+//  echo "sql string: ". $sql; 
 
   $result = mysqli_query($conn, $sql);
 
@@ -28,9 +34,5 @@ if($ids) {
 } else {
   echo "NULL";
 }
-//echo "myFUNC(".$json_payload.");";
-//echo "parsetree(".$json_payload.");";
-
   mysqli_close($conn);
-
 ?>
