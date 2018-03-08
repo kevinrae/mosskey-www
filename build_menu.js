@@ -36,14 +36,14 @@ function show_all_taxa_rows() {
     type: "GET",
     url: url,
     success: function (res){
-      console.log(res);
+//      console.log(res);    // uncomment for debugging
       var o = "";
       if (res === 'NULL') { 
         $('#result_list').html("<li>No matches</li>");
       } else {
       var obj = JSON.parse(res);
         for (var i in obj) {
-//           console.log(obj[i].Name);
+//           console.log(obj[i].Name);  // uncomment for debugging
            o += "<li><a class='taxa' href='detail.html?id=" + obj[i].id + "'>" + obj[i].Name + "</a></li>";
         }
         $('#result_list').html(o);
@@ -138,13 +138,17 @@ function parsetree(data) {
     if (data[row].rht - data[row].lft > 1) { // parent test
       txt += '<li class="dropdown-submenu">';
         txt += '<a href="#">';
+/**************** debugging code **************
 //      txt += '<a class="character" data-id="' + data[row].id; 
 //      txt += ' name="' + data[row].name + '">';
+**********************************************/
       txt += data[row].name;
+/**************** debugging code **************
 //      txt += ' data-id: '+ data[row].id;
 //      txt += ' lft: '+ data[row].lft;
 //      txt += ' rht: '+ data[row].rht;
 //      txt += ' depth: '+ data[row].depth;
+**********************************************/
       txt += '</a>'; 
       txt += '<ul class="dropdown-menu">';
       stack.push(data[row].rht); // store rht in stack for parents
@@ -153,16 +157,32 @@ function parsetree(data) {
       txt += '" href="#"';
       txt += ' name="' + data[row].name + '">';
       txt += data[row].name;
+/**************** debugging code **************
 //      txt += ' data-id: '+ data[row].id;
 //      txt += ' lft: '+ data[row].lft;
 //      txt += ' rht: '+ data[row].rht;
 //      txt += ' depth: '+ data[row].depth;
 //      txt += '</a>';
+**********************************************/
+/*   refactor to use these variables instead (similar to detail.js code)
+***********************************************************************
+      ishandlens = data[row].isHandLens;
+      isscope    = data[row].isScope;
+      iseye      = data[row].isEye;
+*/
+      if (data[row].isEye > 0) {
+        txt += " <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\" title=\"View by Eye\"></span> ";
+      }
+      if (data[row].isHandLens > 0) {
+        txt += " <span class=\"glyphicon glyphicon-zoom-in\" aria-hidden=\"true\" title=\"View with Hand Lens\"></span> ";
+      }
+      if (data[row].isScope > 0) {
+        txt += " <span class=\"glyphicon glyphicon-pawn\" aria-hidden=\"true\" title=\"View with Scope\"></span> ";
+      }
       if (data[row].matches >= 1) {
         txt += ' (' + data[row].matches + ')';
       } 
       txt += '</a></li>'; 
-      
 
       close_tags_for_last_child_in_tree(stack, data[row].rht);
     }

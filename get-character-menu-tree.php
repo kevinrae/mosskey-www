@@ -3,15 +3,6 @@
 require_once 'config.php';
 
 /*
-$sql = "SELECT node.name, node.lft, node.rht, node.id, (COUNT(parent.name) - 1) AS depth
-FROM KeyCharacter AS node,
-        KeyCharacter AS parent
-WHERE node.lft BETWEEN parent.lft AND parent.rht
-GROUP BY node.name
-HAVING depth >= 1
-ORDER BY node.lft;
-";
-*/
 
 $sql = "select a.name, lft, rht, id, depth, IFNULL(matches,0) AS matches FROM
 (SELECT node.name, node.lft, node.rht, node.id, (COUNT(parent.name) - 1) AS depth
@@ -26,6 +17,26 @@ LEFT JOIN
   FROM map, keycharacter WHERE map.keycharacterID=keycharacter.id
   GROUP BY keycharacter.name) b
   ON a.name = b.name;";
+*/
+
+$sql = "select a.name, lft, rht, id, depth, 
+  IFNULL(matches,0) AS matches, 
+  IFNULL(isEye,0) AS isEye, 
+  IFNULL(isHandLens,0) AS isHandLens, 
+  IFNULL(isScope,0) AS isScope FROM
+(SELECT node.name, node.lft, node.rht, node.id, (COUNT(parent.name) - 1) AS depth, node.isEye, node.isHandLens, node.isScope
+  FROM KeyCharacter AS node,
+     KeyCharacter AS parent
+  WHERE node.lft BETWEEN parent.lft AND parent.rht
+  GROUP BY node.name
+  HAVING depth >= 1
+  ORDER BY node.lft) a
+LEFT JOIN
+  (select keycharacter.name, count(map.TaxaId) AS matches
+  FROM map, keycharacter WHERE map.keycharacterID=keycharacter.id
+  GROUP BY keycharacter.name) b
+  ON a.name = b.name;";
+
 
 $result = mysqli_query($conn, $sql);
 
