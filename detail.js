@@ -87,29 +87,29 @@ function detail(idd) {
       var obj = JSON.parse(res);
         for (var i in obj) {
            name = obj[i].name;
-           obj[i].auth !== null ? authority = obj[i].auth : authority = "none";
-           description = obj[i].descr;
+//           obj[i].auth !== null ? authority = obj[i].auth : authority = "none";
+//           description = obj[i].descr;
            obj[i].taxa_timestamp !== null ? taxa_timestamp = obj[i].taxa_timestamp : taxa_timestamp = "none";  
            obj[i].URL_timestamp !== null ? url_timestamp = obj[i].URL_timestamp : url_timestamp = "none";
-           url_type = obj[i].type;                   
+//           url_type = obj[i].type;                   
            url_name = obj[i].url;
            if (url_name !== null) { 
              $('.url').html('<p><a href="'+ url_name+'">' + url_name + '</a></p>');
            }
            o += " name: " + name;
-           o += " authority: " + authority;
-           o += " description: " + description;
+//           o += " authority: " + authority;
+//           o += " description: " + description;
            o += " taxa_timestamp: " + taxa_timestamp;
            o += " url_timestamp: " + url_timestamp;
-           o += " url_type: " + url_type;
+//           o += " url_type: " + url_type;
            o += " url_name: " + url_name;
         }
         console.log(o);
 
         $('.page-header h1').html(name);
-        $('.description').html(description);
+//        $('.description').html(description);
         $('.timestamps').append("<p> Taxa timestamp: " + taxa_timestamp+ "</p>");
-        $('.authority').html("<p>Authority: " +authority+ "</p>");
+//        $('.authority').html("<p>Authority: " +authority+ "</p>");
         $('.timestamps').append(" URL timestamp: " + url_timestamp);
       }
     },
