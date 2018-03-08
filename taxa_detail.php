@@ -5,7 +5,7 @@ require_once 'config.php';
 $id = mysqli_real_escape_string($conn, $_POST['id']);
 if($id) {
 //  echo "$id";
-  $sql = "SELECT taxa.name, authority.name as auth, taxa.description as descr, taxa.timestamp as taxa_timestamp, url.name as url, url.type, url.timestamp as URL_timestamp FROM taxa LEFT JOIN url ON taxa.urlid = url.id LEFT JOIN authority on taxa.authorityid = authority.id WHERE taxa.id=$id;";
+  $sql = "SELECT taxa.Name, taxa.Timestamp as taxa_timestamp, URL.name as url, URL.Type, URL.Timestamp as URL_timestamp FROM taxa LEFT JOIN URL ON taxa.URLId = URL.id WHERE taxa.id=$id;";
 
   $result = mysqli_query($conn, $sql);
 
