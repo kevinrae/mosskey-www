@@ -19,23 +19,23 @@ LEFT JOIN
   ON a.name = b.name;";
 */
 
-$sql = "select a.name, lft, rht, id, depth, 
+$sql = "select a.Name, lft, rht, id, depth, 
   IFNULL(matches,0) AS matches, 
   IFNULL(isEye,0) AS isEye, 
   IFNULL(isHandLens,0) AS isHandLens, 
   IFNULL(isScope,0) AS isScope FROM
-(SELECT node.name, node.lft, node.rht, node.id, (COUNT(parent.name) - 1) AS depth, node.isEye, node.isHandLens, node.isScope
+(SELECT node.Name, node.lft, node.rht, node.id, (COUNT(parent.Name) - 1) AS depth, node.isEye, node.isHandLens, node.isScope
   FROM KeyCharacter AS node,
      KeyCharacter AS parent
   WHERE node.lft BETWEEN parent.lft AND parent.rht
-  GROUP BY node.name
+  GROUP BY node.Name
   HAVING depth >= 1
   ORDER BY node.lft) a
 LEFT JOIN
-  (select keycharacter.name, count(map.TaxaId) AS matches
-  FROM map, keycharacter WHERE map.keycharacterID=keycharacter.id
-  GROUP BY keycharacter.name) b
-  ON a.name = b.name;";
+  (select KeyCharacter.Name, count(Map.TaxaId) AS matches
+  FROM Map, KeyCharacter WHERE Map.KeyCharacterId=KeyCharacter.id
+  GROUP BY KeyCharacter.Name) b
+  ON a.Name = b.Name;";
 
 
 $result = mysqli_query($conn, $sql);

@@ -43,10 +43,10 @@ function show_all_characters(x) {
       } else {
       var obj = JSON.parse(res);
         for (var i in obj) {
-           name       = obj[i].name;
-           iseye      = obj[i].iseye;
-           ishandlens = obj[i].ishandlens;
-           isscope    = obj[i].isscope;
+           name       = obj[i].Name;
+           iseye      = obj[i].isEye;
+           ishandlens = obj[i].isHandLens;
+           isscope    = obj[i].isScope;
            o += "<li>" + name;
            if (iseye === '1') {
              o += " <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\" title=\"View by Eye\"></span>";
@@ -86,7 +86,7 @@ function detail(idd) {
       } else {
       var obj = JSON.parse(res);
         for (var i in obj) {
-           name = obj[i].name;
+           name = obj[i].Name;
 //           obj[i].auth !== null ? authority = obj[i].auth : authority = "none";
 //           description = obj[i].descr;
            obj[i].taxa_timestamp !== null ? taxa_timestamp = obj[i].taxa_timestamp : taxa_timestamp = "none";  

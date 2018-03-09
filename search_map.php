@@ -9,9 +9,9 @@ if($ids) {
   $string_of_ids = implode(',',$ids);
 
   $sql  = "SELECT taxa.Name, taxa.id FROM (SELECT taxa.Name, taxa.id FROM taxa) taxa"; 
-  $sql .= " JOIN (SELECT map.taxaid FROM map WHERE map.keycharacterid IN ($string_of_ids)";
-  $sql .= " GROUP BY taxaid HAVING COUNT( DISTINCT map.KeyCharacterId ) = $num_of_ids ) map";
-  $sql .= " WHERE map.taxaid = taxa.id;";
+  $sql .= " JOIN (SELECT Map.TaxaId FROM Map WHERE Map.KeyCharacterId IN ($string_of_ids)";
+  $sql .= " GROUP BY TaxaId HAVING COUNT( DISTINCT Map.KeyCharacterId ) = $num_of_ids ) Map";
+  $sql .= " WHERE Map.TaxaId = taxa.id;";
 
 //  echo "sql string: ". $sql; 
 

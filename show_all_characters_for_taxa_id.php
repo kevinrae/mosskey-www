@@ -4,8 +4,8 @@ require_once 'config.php';
 
 $id = mysqli_real_escape_string($conn, $_POST['id']);
 if($id) {
-//  echo "$id";
-  $sql = "select keycharacter.name, keycharacter.iseye, keycharacter.ishandlens, keycharacter.isscope FROM map, keycharacter WHERE map.keycharacterID=keycharacter.id AND map.TaxaId=$id;";
+//  echo "$id";   // debugging
+  $sql = "SELECT KeyCharacter.Name, KeyCharacter.isEye, KeyCharacter.isHandLens, KeyCharacter.isScope FROM Map, KeyCharacter WHERE Map.KeyCharacterId=KeyCharacter.id AND Map.TaxaId=$id;";
 
   $result = mysqli_query($conn, $sql);
 

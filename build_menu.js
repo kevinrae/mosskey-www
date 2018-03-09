@@ -142,7 +142,7 @@ function parsetree(data) {
 //      txt += '<a class="character" data-id="' + data[row].id; 
 //      txt += ' name="' + data[row].name + '">';
 **********************************************/
-      txt += data[row].name;
+      txt += data[row].Name;
 /**************** debugging code **************
 //      txt += ' data-id: '+ data[row].id;
 //      txt += ' lft: '+ data[row].lft;
@@ -155,8 +155,8 @@ function parsetree(data) {
       } else { // this is a leaf node 
       txt += '<li><a class="character" data-id="' + data[row].id; 
       txt += '" href="#"';
-      txt += ' name="' + data[row].name + '">';
-      txt += data[row].name;
+      txt += ' name="' + data[row].Name + '">';
+      txt += data[row].Name;
 /**************** debugging code **************
 //      txt += ' data-id: '+ data[row].id;
 //      txt += ' lft: '+ data[row].lft;
