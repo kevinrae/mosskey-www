@@ -8,10 +8,12 @@ if($ids) {
   $num_of_ids = count($ids);
   $string_of_ids = implode(',',$ids);
 
-  $sql  = "SELECT taxa.Name, taxa.id FROM (SELECT taxa.Name, taxa.id FROM taxa) taxa"; 
-  $sql .= " JOIN (SELECT Map.TaxaId FROM Map WHERE Map.KeyCharacterId IN ($string_of_ids)";
-  $sql .= " GROUP BY TaxaId HAVING COUNT( DISTINCT Map.KeyCharacterId ) = $num_of_ids ) Map";
-  $sql .= " WHERE Map.TaxaId = taxa.id;";
+  $sql  = "SELECT taxa.Name, taxa.id 
+           FROM (SELECT taxa.Name, taxa.id FROM taxa) taxa 
+           JOIN 
+           (SELECT Map.TaxaId FROM Map WHERE Map.KeyCharacterId IN ($string_of_ids)
+            GROUP BY TaxaId HAVING COUNT( DISTINCT Map.KeyCharacterId ) = $num_of_ids ) Map
+           WHERE Map.TaxaId = taxa.id;";
 
 //  echo "sql string: ". $sql; 
 
